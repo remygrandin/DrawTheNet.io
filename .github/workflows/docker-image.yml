@@ -67,22 +67,22 @@ jobs:
           destination: dist
 
       - name: Zip dist folder
-        run: zip -r drawthenet.io.zip dist/*
+        run: zip -r drawthenet.io-AutoBuild-${{ steps.date.outputs.date }}-dist-${{ steps.meta.outputs.SHORT_SHA }}.zip dist/*
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: drawthenet.io-${{ steps.date.outputs.date }}-dist-${{ steps.meta.outputs.SHORT_SHA }}
+          name: drawthenet.io-AutoBuild-${{ steps.date.outputs.date }}-dist-${{ steps.meta.outputs.SHORT_SHA }}
           path: dist/*
 
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: drawthenet.io.zip
+          files: drawthenet.io-AutoBuild-${{ steps.date.outputs.date }}-dist-${{ steps.meta.outputs.SHORT_SHA }}.zip
           generate_release_notes: true
           draft: false
           prerelease: false
-          tag_name: release
+          tag_name: AutoBuild-${{ steps.meta.outputs.SHORT_SHA }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
