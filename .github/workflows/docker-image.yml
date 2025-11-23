@@ -1,4 +1,4 @@
-name: Build and Publish Docker Image
+name: AutoBuild
 
 on:
   push:
@@ -67,13 +67,13 @@ jobs:
           destination: dist
 
       - name: Zip dist folder
-        run: zip -r drawthenet.io.zip dist/
+        run: zip -r drawthenet.io.zip dist/*
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: drawthenet.io-${{ steps.date.outputs.date }}-dist-${{ steps.meta.outputs.SHORT_SHA }}
-          path: dist
+          path: dist/*
 
 
       - name: Create Release
