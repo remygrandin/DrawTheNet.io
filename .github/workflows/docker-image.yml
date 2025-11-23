@@ -75,6 +75,7 @@ jobs:
           name: drawthenet.io-${{ steps.date.outputs.date }}-dist-${{ steps.meta.outputs.SHORT_SHA }}
           path: dist
 
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
