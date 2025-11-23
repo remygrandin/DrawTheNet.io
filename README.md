@@ -10,6 +10,9 @@ Given a yaml file describing the hierarchy of the network and it's connections, 
 
 ![screenshot](docs/interface.png)
 
+
+[![Build](https://github.com/remygrandin/DrawTheNet.IO/actions/workflows/docker-image.yml/badge.svg)](https://github.com/remygrandin/DrawTheNet.IO/actions/workflows/docker-image.yml)
+
 # Motivation
 
 Complex network diagrams typically involve specific placement of icons, connections and labels using a tool like Visio or OmniGraffle, using a mouse, and constantly zooming in and out for single pixel placement. 
@@ -21,6 +24,51 @@ Also, being able to store a diagram as text makes it easy to version control and
 # Quick start
 
 Go to https://drawthenet.io and start creating diagrams.
+
+# Deploying with Docker
+
+## Using the Official Docker Image
+
+You can deploy DrawTheNet.IO using the official Docker image from Docker Hub:
+
+```bash
+docker run -d -p 8080:80 --name drawthenet darkphoenics/drawthenet.io:latest
+```
+
+The application will be available at `http://localhost:8080`.
+
+## Docker Compose
+
+For easier deployment and management, you can use Docker Compose. Create a `docker-compose.yml` file:
+
+```yaml
+version: '3.8'
+
+services:
+  drawthenet:
+    image: darkphoenics/drawthenet.io:latest
+    container_name: drawthenet
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+```
+
+Then start the service:
+
+```bash
+docker-compose up -d
+```
+
+## Custom Configuration
+
+If you need to customize the nginx configuration, you can mount your own configuration file:
+
+```bash
+docker run -d -p 8080:80 \
+  -v /path/to/your/nginx.conf:/etc/nginx/conf.d/default.conf \
+  --name drawthenet \
+  darkphoenics/drawthenet.io:latest
+```
 
 # More Info
 
