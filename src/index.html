@@ -630,28 +630,27 @@
 
             // Autocompletion keywords and values based on the YAML schema
             let completerKeywords = {
-                root: ["document", "diagram", "title", "icons", "groups", "connections", "notes", "defaults"],
-                document: ["aspectRatio", "margin", "fill", "watermark", "renderRatio", "fileTitlePrefix", "schemasVersion"],
-                diagram: ["columns", "rows", "invertY", "gridLines", "margin"],
-                title: ["border", "position", "text", "subText", "author", "company", "date", "version", "color", "stroke", "fill", "heightPercentage", "padding", "logoUrl", "logoFill"],
-                icon: ["x", "y", "w", "h", "margin", "padding", "textLocation", "textSizeRatio", "iconFamily", "icon", "fill", "stroke", "color", "strokeDashArray", "iconFill", "iconStroke", "iconStrokeWidth", "preserveWhite", "animated", "animationSpeed", "text", "url", "metadata"],
-                group: ["members", "padding", "textSizeRatio", "fill", "stroke", "color", "textLocation", "text"],
-                connection: ["endpoints", "textSizeRatio", "color", "stroke", "strokeDashArray", "strokeWidth", "curve", "curveOffset", "endpLabelOffsetRatio", "margin", "animated", "animationSpeed", "text"],
-                note: ["x", "y", "w", "h", "margin", "padding", "textSizeRatio", "fill", "stroke", "color", "xAlign", "yAlign", "flexDirection", "text"],
-                margin: ["top", "right", "bottom", "left"],
-                padding: ["top", "right", "bottom", "left"]
+                "diagram": ["columns", "rows", "width", "height", "meta", "title", "icons", "groups", "connections", "notes"],
+                "meta": ["title", "author", "company", "date", "version", "filename", "description"],
+                "title": ["border", "position", "text", "subText", "author", "company", "date", "version", "color", "stroke", "fill", "heightPercentage", "padding", "logoUrl", "logoIcon", "logoIconFamily", "logoFill"],
+                "icons": ["iconFamily", "icon", "text", "x", "y", "w", "h", "margin", "padding", "textSizeRatio", "textLocation", "url", "color", "fill", "stroke", "strokeDashArray", "iconFill", "iconStroke", "iconStrokeWidth", "preserveWhite", "metadata", "animated", "animationSpeed"],
+                "groups": ["members", "padding", "textSizeRatio", "textLocation", "color", "fill", "stroke", "strokeDashArray", "text", "animated", "animationSpeed"],
+                "connections": ["endpoints", "curve", "curveOffset", "textSizeRatio", "endpLabelOffsetRatio", "margin", "color", "stroke", "strokeDashArray", "strokeWidth", "animated", "animationSpeed", "text"],
+                "notes": ["x", "y", "xAlign", "yAlign", "alignItems", "flexDirection", "justifyContent", "w", "h", "margin", "padding", "textSizeRatio", "color", "fill", "stroke", "strokeDashArray", "text"]
             };
 
             let completerValues = {
-                textLocation: ["center", "topLeft", "topCenter", "topRight", "rightTop", "rightCenter", "rightBottom", "bottomRight", "bottomCenter", "bottomLeft", "leftBottom", "leftCenter", "leftTop"],
-                position: ["top", "bottom", "none"],
-                border: ["bar", "none"],
-                curve: ["Linear", "Basis", "Bundle", "Cardinal", "CatmullRom", "MonotoneX", "MonotoneY", "Natural", "Step", "StepAfter", "StepBefore"],
-                xAlign: ["left", "center", "right"],
-                yAlign: ["top", "center", "bottom"],
-                flexDirection: ["row", "column"],
-                animationSpeed: ["slow", "medium", "fast"],
-                iconFamily: ["Iconify", "AWS", "Azure", "Cisco", "GCP", "K8S", "M365"]
+                "iconFamily": ["AWS", "Azure", "Cisco", "D365", "Fortinet", "GCP", "M365", "PowerPlatform", "Iconify"],
+                "logoIconFamily": ["AWS", "Azure", "Cisco", "D365", "Fortinet", "GCP", "M365", "PowerPlatform", "Iconify"],
+                "textLocation": ["center", "topLeft", "topCenter", "topRight", "rightTop", "rightCenter", "rightBottom", "bottomLeft", "bottomCenter", "bottomRight", "leftTop", "leftCenter", "leftBottom"],
+                "position": ["top", "bottom", "none"],
+                "border": ["bar", "none"],
+                "curve": ["Linear", "Basis", "Bundle", "Cardinal", "CatmullRom", "MonotoneX", "MonotoneY", "Natural", "Step", "StepAfter", "StepBefore"],
+                "xAlign": ["left", "center", "right"],
+                "yAlign": ["top", "center", "bottom"],
+                "flexDirection": ["row", "column"],
+                "animationSpeed": ["slow", "medium", "fast"],
+                "iconFamily": ["Iconify", "AWS", "Azure", "Cisco", "GCP", "K8S", "M365"]
             };
 
             let completer = {
