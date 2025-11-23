@@ -8,7 +8,7 @@ import { RenderGroups } from './groups.js'
 import { RenderNotes } from './notes.js'
 import { ExtractColorAndOpacity } from './common.js'
 
-export function Render(containerSelector, doc, keepZoom) {
+export function Render(containerSelector, doc, keepZoom, enableZoom = true) {
     ApplyDefaults(doc);
     
     // Save the current zoom transform if keepZoom is true
@@ -81,13 +81,15 @@ export function Render(containerSelector, doc, keepZoom) {
         d3.select(containerSelector).node().dispatchEvent(new CustomEvent("zoomchange", { detail: e.transform }));
     });
 
-    // Apply zoom behavior to the main container
-    mainContainer.call(zoom);
-    mainContainer.node().__zoomBehavior = zoom;
+    if (enableZoom) {
+        // Apply zoom behavior to the main container
+        mainContainer.call(zoom);
+        mainContainer.node().__zoomBehavior = zoom;
 
-    // Apply the saved zoom transform if keepZoom was true
-    if (keepZoom && initialZoom && (initialZoom.k !== 1 || initialZoom.x !== 0 || initialZoom.y !== 0)) {
-        mainContainer.call(zoom.transform, initialZoom);
+        // Apply the saved zoom transform if keepZoom was true
+        if (keepZoom && initialZoom && (initialZoom.k !== 1 || initialZoom.x !== 0 || initialZoom.y !== 0)) {
+            mainContainer.call(zoom.transform, initialZoom);
+        }
     }
 
     let documentContainer = zoomContainer.append("g")

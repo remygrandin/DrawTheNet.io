@@ -557,6 +557,7 @@
                 let urlParams = new URLSearchParams();
 
                 urlParams.set("fullscreen", obj.fullscreen);
+                urlParams.set("zoomEnabled", obj.zoomEnabled);
                 urlParams.set("autosave", obj.autosave);
                 urlParams.set("autoupdate", obj.autoupdate);
                 urlParams.set("includeYamlInSvg", obj.includeYamlInSvg);
@@ -571,6 +572,7 @@
 
                 let returnObj = {
                     "fullscreen": urlParams.get("fullscreen") === "true",
+                    "zoomEnabled": urlParams.get("zoomEnabled") !== "false",
                     "autosave": urlParams.get("autosave") !== "false",
                     "autoupdate": urlParams.get("autoupdate") !== "false",
                     "includeYamlInSvg": urlParams.get("includeYamlInSvg") !== "false",
@@ -897,7 +899,7 @@
                         }
 
                         let doc = jsyaml.load(text);
-                        Renderer("#preview", doc, keepZoom);
+                        Renderer("#preview", doc, keepZoom, currentParams.zoomEnabled);
 
                         if (errorToast !== null) {
                             errorToast.reset();
