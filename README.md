@@ -4,14 +4,30 @@
 
 DrawTheNet.IO draws network diagrams dynamically from a text file describing the placement, layout and icons.
 
-## See in live :  https://DrawTheNet.IO
+## Live Demo :  https://DrawTheNet.IO
 
-Given a yaml file describing the hierarchy of the network and it's connections, a resulting diagram will be created. 
+Given a yaml file describing the hierarchy of the network and its connections, a resulting diagram will be created. 
 
 ![screenshot](docs/interface.png)
 
 
 [![Build](https://github.com/remygrandin/DrawTheNet.IO/actions/workflows/docker-image.yml/badge.svg)](https://github.com/remygrandin/DrawTheNet.IO/actions/workflows/docker-image.yml)
+
+## Table of Contents
+
+- [Motivation](#motivation)
+- [Quick start](#quick-start)
+- [Deploying with Docker](#deploying-with-docker)
+- [Deploying Static Files](#deploying-static-files)
+- [More Info](#more-info)
+- [Vendor Icons](#vendor-icons)
+- [Privacy notice](#privacy-notice)
+- [Build Instructions](#build-instructions)
+- [Built with great open source software](#built-with-great-open-source-software)
+- [Contributing](#contributing)
+- [Versioning](#versioning)
+- [Authors](#authors)
+- [License](#license)
 
 # Motivation
 
@@ -25,7 +41,7 @@ Also, being able to store a diagram as text makes it easy to version control and
 
 Go to https://drawthenet.io and start creating diagrams.
 
-# Deploying with Docker
+# Deploying with Docker (Recommended)
 
 ## Using the Official Docker Image
 
@@ -70,12 +86,22 @@ docker run -d -p 8080:80 \
   darkphoenics/drawthenet.io:latest
 ```
 
+# Deploying Static Files
+
+You can deploy DrawTheNet.IO as a set of static files without using Docker.
+
+1. Download the latest release zip file from the [Releases page](https://github.com/remygrandin/DrawTheNet.IO/releases).
+2. Extract the contents of the zip file to your web server's document root (e.g., `/var/www/html` for Apache or Nginx).
+3. Ensure your web server is configured to serve static files.
+
+That's it! The application runs entirely in the browser, so no backend application server is required.
+
 # More Info
 
 You can find a detailed help guide, including a full list of available properties integrated into the app by using the ? button in the top left corner of it, or [here](https://DrawTheNet.IO/help.html)
 
-# Vendors Icons
-The follwing vendors are available by default:
+# Vendor Icons
+The following vendors are available by default:
  - Amazon Web Services (as AWS), from https://aws.amazon.com/architecture/icons/?nc1=h_ls
  - Microsoft Azure (as Azure), from https://learn.microsoft.com/fr-fr/azure/architecture/icons/
  - Microsoft 365 (as M365), from https://learn.microsoft.com/fr-fr/microsoft-365/solutions/architecture-icons-templates
@@ -90,23 +116,23 @@ You also have access to all the icons from [Iconify](https://icon-sets.iconify.d
 
 # Privacy notice
 
-Tha app was designed to be used in a browser and does not require any installation. No diagram are stored anywhere but locally to your PC.
+The app was designed to be used in a browser and does not require any installation. No diagrams are stored anywhere but locally to your PC.
 
-# Build Instruction
-## Docker Build (Prefered)
+# Build Instructions
+## Docker Build (Preferred)
 
-You can easily build the tool to host locally with the provided [docker file](./tools/Dockerfile):
+You can easily build the tool to host locally with the provided [Dockerfile](./tools/Dockerfile):
 
 ```
 cd ./tools/
 docker build -t local/drawthenet.io .
 ```
 
-It will build the docker image from scratch, including downloading the icons from all vendor specified above. It will run the app with nginx, listening on port 80.
+It will build the docker image from scratch, including downloading the icons from all vendors specified above. It will run the app with nginx, listening on port 80.
 
 ## Local Build
-You need [libvisio2svg](https://github.com/kakwa/libvisio2svg) includning its dependencies (libxml2-dev libwmf-dev gsfonts libemf2svg-dev libvisio-dev librevenge-dev) and powershell installed and available in you path for the full build to work.
-If not, some icons set (Cisco, Fortinet) will not be generated and available.
+You need [libvisio2svg](https://github.com/kakwa/libvisio2svg) including its dependencies (libxml2-dev libwmf-dev gsfonts libemf2svg-dev libvisio-dev librevenge-dev) and powershell installed and available in your path for the full build to work.
+If not, some icon sets (Cisco, Fortinet) will not be generated and available.
 You can find the build script in the [tools folder](./tools/build.ps1)
 
 ```
@@ -152,6 +178,6 @@ Please do.
 
 # License
 
-This project is licensed under the MIT License. (see LISENCE.TXT)
+This project is licensed under the MIT License. (see LICENSE.txt)
 
 The logo of the project is licensed under the Apache 2.0 (https://github.com/bytedance/IconPark/blob/master/LICENSE)
