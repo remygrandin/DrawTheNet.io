@@ -145,6 +145,16 @@
                 <p>
                     DrawTheNet.IO is a web application to draw network diagrams with simple yaml code.<br>
                 </p>
+
+                <h4>Key Features</h4>
+                <ul>
+                    <li><strong>Text-to-Diagram</strong>: Define your infrastructure using simple, human-readable YAML syntax.</li>
+                    <li><strong>Extensive Icon Library</strong>: Built-in support for major cloud providers (AWS, Azure, GCP) and network vendors (Cisco, Fortinet), plus thousands of icons via Iconify.</li>
+                    <li><strong>Version Control Friendly</strong>: Since diagrams are code, they can be stored in Git, diffed, and reviewed just like software.</li>
+                    <li><strong>Export Options</strong>: Export your diagrams to high-quality SVG or PNG formats for presentations and documentation.</li>
+                    <li><strong>Privacy Focused</strong>: The application runs entirely in your browser. Your diagram data is never sent to the server.</li>
+                </ul>
+
                 <h4>Documentation structure</h4>
                 You can navigate in the documentation using the tabs in the top.<br>
 
@@ -171,6 +181,13 @@
                     git repository, or any documentation system. You can even use the generated URL to jump on the
                     editor quickly.
                 </p>
+
+                <h4>Feedback & Contributions</h4>
+                <p>
+                    Found a bug? Have a feature request? The project is open source!<br>
+                    Please report issues or contribute on GitHub.
+                </p>
+
                 <p>
                     More info on <a href="https://github.com/remygrandin/drawthenet.io">
                         <span class="badge bg-success"><iconify-icon inline icon="mdi:github"></iconify-icon>
@@ -183,10 +200,10 @@
             <div class="tab-pane fade" id="nav-help-interface" role="tabpanel" tabindex="1">
                 <h2 class="mt-2">Interface</h2>
                 <div class="row mb-2">
-                    <div class="col-8">
+                    <div class="col-8 col-sm-6">
                         <img src="./res/help/interface.png" class="w-100">
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 col-sm-6">
                         <p>
                             The interface is divided in 4 parts:
                         </p>
@@ -1037,6 +1054,7 @@ icons:
                         <div class="previewBlock">
                             <pre class="shortCode"><code class="yaml">title:
   text: "Production Network"
+
 </code></pre>
                             <pre class="fullCode"><code class="yaml">document:
   watermark: false
@@ -1192,6 +1210,7 @@ icons:
                             <pre class="shortCode"><code class="yaml">title:
   text: "Network Diagram"
   author: "John Doe"
+
 </code></pre>
                             <pre class="fullCode"><code class="yaml">document:
   watermark: false
@@ -1214,6 +1233,8 @@ icons:
   text: "Network Diagram"
   author: "John Doe"
   logoUrl: "https://example.com/logo.svg"
+
+  
 </code></pre>
                             <pre class="fullCode"><code class="yaml">document:
   watermark: false
@@ -1467,28 +1488,40 @@ icons:
                 <h2 class="mt-2">Icons</h2>
                 <p>
                     Icons are at the core of DrawTheNet.IO. They are the main way to represent nodes your network.<br>
+                    They are defined in the <code>icons</code> section.
+                </p>
+
+                <h3 class="mt-2">Basic Icon</h3>
+                <p>
+                    An icon is defined by its position (<code>x</code>, <code>y</code>) and its family (<code>iconFamily</code>) and its name (<code>icon</code>).<br>
+                    An icon is composed of a rounded rectangle ontop of which is the icon image and the name of the node.
                 </p>
                 <div class="row">
                     <div class="col border p-3">
-                        <pre><code class="yaml">icons:
-  chddc1slb005:
-    x: 3
+                        <h4>Simple Icon</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">icons:
+  myRouter:
+    x: 2
     y: 2
-    icon: "load-balancers"
-    iconFamily: "azure"
-    color: "white"
-    fill: "#555555"</code></pre>
+    icon: router
+    iconFamily: cisco</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
+  columns: 5
+  rows: 5
+icons:
+  myRouter:
+    x: 2
+    y: 2
+    icon: router
+    iconFamily: cisco</code></pre>
+                        </div>
                     </div>
-                    <div class="col text-center border p-3">
-                        <img src="./res/help/icon.png" class="border">
-                    </div>
-
                 </div>
-
-                <p>
-                    An icon is composed of a rounded rectangle ontop of which is the icon image and the name of the
-                    node.
-                </p>
 
                 <h3 class="mt-2">Icon Family</h3>
                 <p>
@@ -1529,27 +1562,55 @@ icons:
                 <div class="row">
                     <div class="col border p-3">
                         <h4>1x1 (Default)</h4>
-                        <pre><code class="yaml">icons:
-  chddc1slb005:
-    x: 3
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">icons:
+  myRouter:
+    x: 2
     y: 2
-    icon: "load-balancers"
-    iconFamily: "azure"
-    color: "white"
-    fill: "#555555"</code></pre>
+    icon: router
+    iconFamily: cisco</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
+  columns: 5
+  rows: 5
+icons:
+  myRouter:
+    x: 2
+    y: 2
+    icon: router
+    iconFamily: cisco</code></pre>
+                        </div>
                     </div>
                     <div class="col border p-3">
                         <h4>1x2</h4>
-                        <pre><code class="yaml">icons:
-  chddc1slb005:
-    x: 3
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">icons:
+  myRouter:
+    x: 2
     y: 2
     w: 1
     h: 2
-    icon: "load-balancers"
-    iconFamily: "azure"
-    color: "white"
-    fill: "#555555"</code></pre>
+    icon: router
+    iconFamily: cisco</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
+  columns: 5
+  rows: 5
+icons:
+  myRouter:
+    x: 2
+    y: 2
+    w: 1
+    h: 2
+    icon: router
+    iconFamily: cisco</code></pre>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1575,9 +1636,13 @@ icons:
   myGroup:
     members: [icon1, icon2]
     text: "My Group"</code></pre>
-                            <pre class="fullCode"><code class="yaml">diagram:
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
   columns: 4
-  rows: 4
+  rows: 3
 icons:
   icon1: {x: 1, y: 1, icon: router, iconFamily: cisco}
   icon2: {x: 2, y: 1, icon: switch, iconFamily: cisco}
@@ -1613,9 +1678,13 @@ groups:
     fill: "#ffeeee"
     stroke: "red"
     strokeDashArray: "5,5"</code></pre>
-                            <pre class="fullCode"><code class="yaml">diagram:
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
   columns: 4
-  rows: 4
+  rows: 3
 icons:
   icon1: {x: 1, y: 1, icon: router, iconFamily: cisco}
   icon2: {x: 2, y: 1, icon: switch, iconFamily: cisco}
@@ -1650,9 +1719,13 @@ groups:
     members: [icon1, icon2]
     text: "Bottom Label"
     textLocation: "bottomCenter"</code></pre>
-                            <pre class="fullCode"><code class="yaml">diagram:
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
   columns: 4
-  rows: 4
+  rows: 3
 icons:
   icon1: {x: 1, y: 1, icon: router, iconFamily: cisco}
   icon2: {x: 2, y: 1, icon: switch, iconFamily: cisco}
@@ -1667,13 +1740,407 @@ groups:
             </div>
             <div class="tab-pane fade" id="nav-help-notes" role="tabpanel" tabindex="8">
                 <h2 class="mt-2">Notes</h2>
+                <p>
+                    Notes allow you to add text, explanations, or Markdown content to your diagram.<br>
+                    They are defined in the <code>notes</code> section.
+                </p>
 
+                <h3 class="mt-2">Basic Note</h3>
+                <p>
+                    A note is defined by its position (<code>x</code>, <code>y</code>) and its content (<code>text</code>).<br>
+                    By default, a note has a size of 1x1 grid unit.
+                </p>
+                <div class="row">
+                    <div class="col border p-3">
+                        <h4>Simple Note</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">notes:
+  myNote:
+    x: 1
+    y: 1
+    text: "Hello World"</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
+  columns: 4
+  rows: 4
+notes:
+  myNote:
+    x: 1
+    y: 1
+    text: "Hello World"</code></pre>
+                        </div>
+                    </div>
+                </div>
 
+                <h3 class="mt-2">Markdown Content</h3>
+                <p>
+                    The <code>text</code> property supports Markdown syntax.<br>
+                    You can use headings, lists, code blocks, and more.
+                </p>
+                <div class="row">
+                    <div class="col border p-3">
+                        <h4>Markdown Note</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">notes:
+  mdNote:
+    x: 1
+    y: 1
+    w: 2
+    h: 2
+    text: |
+      # Heading
+      - Item 1
+      - Item 2
+      
+      `code block`</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
+  columns: 4
+  rows: 4
+notes:
+  mdNote:
+    x: 1
+    y: 1
+    w: 2
+    h: 2
+    text: |
+      # Heading
+      - Item 1
+      - Item 2
+      
+      `code block`</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mt-2">Styling</h3>
+                <p>
+                    You can customize the appearance of the note using:
+                    <ul>
+                        <li><code>color</code>: The color of the text.</li>
+                        <li><code>fill</code>: The background color of the note.</li>
+                        <li><code>stroke</code>: The color of the note border.</li>
+                    </ul>
+                </p>
+                <div class="row">
+                    <div class="col border p-3">
+                        <h4>Styled Note</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">notes:
+  styledNote:
+    x: 1
+    y: 1
+    text: "Styled Note"
+    color: "white"
+    fill: "#0066cc"
+    stroke: "black"</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+diagram:
+  columns: 4
+  rows: 4
+notes:
+  styledNote:
+    x: 1
+    y: 1
+    text: "Styled Note"
+    color: "white"
+    fill: "#0066cc"
+    stroke: "black"</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mt-2">Alignment</h3>
+                <p>
+                    You can easily align the content within the note using <code>xAlign</code> and <code>yAlign</code> properties.
+                </p>
+                <ul>
+                    <li><code>xAlign</code>: Horizontal alignment (<code>left</code>, <code>center</code>, <code>right</code>). Default is <code>left</code>.</li>
+                    <li><code>yAlign</code>: Vertical alignment (<code>top</code>, <code>center</code>, <code>bottom</code>). Default is <code>top</code>.</li>
+                </ul>
+                <div class="row">
+                    <div class="col border p-3">
+                        <h4>Centered Content</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">notes:
+  centeredNote:
+    x: 1
+    y: 1
+    w: 2
+    h: 2
+    text: "Centered"
+    xAlign: "center"
+    yAlign: "center"</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
+  columns: 4
+  rows: 4
+notes:
+  centeredNote:
+    x: 1
+    y: 1
+    w: 2
+    h: 2
+    text: "Centered"
+    xAlign: "center"
+    yAlign: "center"</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mt-2">Advanced Layout</h3>
+                <p>
+                    For more control, you can use standard Flexbox properties. These will override <code>xAlign</code> and <code>yAlign</code>.
+                    <ul>
+                        <li><code>textAlign</code>: Text alignment (left, center, right, justify).</li>
+                        <li><code>justifyContent</code>: Vertical alignment (flex-start, center, flex-end, etc.).</li>
+                        <li><code>alignItems</code>: Horizontal alignment (flex-start, center, flex-end, etc.).</li>
+                        <li><code>flexDirection</code>: Direction of the flex container (column, row, etc.). Default is <code>column</code>.</li>
+                    </ul>
+                </p>
             </div>
             <div class="tab-pane fade" id="nav-help-connections" role="tabpanel" tabindex="9">
                 <h2 class="mt-2">Connections</h2>
+                <p>
+                    Connections define the links between nodes (icons, notes, or groups) in the diagram.<br>
+                    They are defined in the <code>connections</code> section.
+                </p>
 
+                <h3 class="mt-2">Endpoints</h3>
+                <p>
+                    The most important property of a connection is <code>endpoints</code>.<br>
+                    It is an array of two strings, each defining the start and end points of the connection.<br>
+                    The format for an endpoint is <code>"nodeName:portLabel"</code>.<br>
+                    The <code>portLabel</code> is optional and will be displayed near the connection endpoint.
+                </p>
+                <div class="row">
+                    <div class="col border p-3">
+                        <h4>Basic Connection</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">connections:
+  link1:
+    endpoints: ["router1", "switch1"]</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
+  columns: 4
+  rows: 4
+icons:
+  router1: {x: 1, y: 2, icon: router, iconFamily: cisco}
+  switch1: {x: 3, y: 2, icon: switch, iconFamily: cisco}
+connections:
+  link1:
+    endpoints: ["router1", "switch1"]</code></pre>
+                        </div>
+                    </div>
+                    <div class="col border p-3">
+                        <h4>Connection with Port Labels</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">connections:
+  link1:
+    endpoints: ["router1:Gi0/0", "switch1:Gi1/0/1"]</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
+  columns: 4
+  rows: 4
+icons:
+  router1: {x: 1, y: 2, icon: router, iconFamily: cisco}
+  switch1: {x: 3, y: 2, icon: switch, iconFamily: cisco}
+connections:
+  link1:
+    endpoints: ["router1:Gi0/0", "switch1:Gi1/0/1"]</code></pre>
+                        </div>
+                    </div>
+                </div>
 
+                <h3 class="mt-2">Styling</h3>
+                <p>
+                    You can customize the appearance of the connection using:
+                    <ul>
+                        <li><code>stroke</code>: The color of the connection line. Default is <code>black</code>.</li>
+                        <li><code>strokeWidth</code>: The width of the connection line. Default is <code>1</code>.</li>
+                        <li><code>strokeDashArray</code>: To create dashed lines. Default is <code>null</code>.</li>
+                        <li><code>color</code>: The color of the text labels. Default is <code>black</code>.</li>
+                    </ul>
+                </p>
+                <div class="row">
+                    <div class="col border p-3">
+                        <h4>Styled Connection</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">connections:
+  link1:
+    endpoints: ["router1", "switch1"]
+    stroke: "blue"
+    strokeWidth: 2
+    strokeDashArray: "5,5"
+    color: "red"</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
+  columns: 4
+  rows: 4
+icons:
+  router1: {x: 1, y: 2, icon: router, iconFamily: cisco}
+  switch1: {x: 3, y: 2, icon: switch, iconFamily: cisco}
+connections:
+  link1:
+    endpoints: ["router1", "switch1"]
+    stroke: "blue"
+    strokeWidth: 2
+    strokeDashArray: "5,5"
+    color: "red"</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mt-2">Curve Type</h3>
+                <p>
+                    The <code>curve</code> property defines the shape of the connection line.<br>
+                    Available values are:
+                    <ul>
+                        <li><code>linear</code>: A straight line (default).</li>
+                        <li><code>curved</code>: A smooth curve.</li>
+                        <li><code>step</code>: A stepped line (horizontal then vertical).</li>
+                        <li><code>stepreversed</code>: A stepped line (vertical then horizontal).</li>
+                        <li><code>stepbefore</code>: A stepped line (horizontal, vertical, horizontal).</li>
+                        <li><code>stepafter</code>: A stepped line (vertical, horizontal, vertical).</li>
+                    </ul>
+                </p>
+                <div class="row">
+                    <div class="col border p-3">
+                        <h4>Curved Connection</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">connections:
+  link1:
+    endpoints: ["router1", "switch1"]
+    curve: "curved"</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
+  columns: 4
+  rows: 4
+icons:
+  router1: {x: 1, y: 2, icon: router, iconFamily: cisco}
+  switch1: {x: 3, y: 2, icon: switch, iconFamily: cisco}
+connections:
+  link1:
+    endpoints: ["router1", "switch1"]
+    curve: "curved"</code></pre>
+                        </div>
+                    </div>
+                    <div class="col border p-3">
+                        <h4>Step Connection</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">connections:
+  link1:
+    endpoints: ["router1", "switch1"]
+    curve: "step"</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
+  columns: 4
+  rows: 4
+icons:
+  router1: {x: 1, y: 2, icon: router, iconFamily: cisco}
+  switch1: {x: 3, y: 2, icon: switch, iconFamily: cisco}
+connections:
+  link1:
+    endpoints: ["router1", "switch1"]
+    curve: "step"</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mt-2">Curve Offset</h3>
+                <p>
+                    The <code>curveOffset</code> property allows you to adjust the curvature or the position of the step.<br>
+                    It is a numeric value.
+                </p>
+
+                <h3 class="mt-2">Labels</h3>
+                <p>
+                    You can add a label to the middle of the connection using the <code>text</code> property.
+                </p>
+                <div class="row">
+                    <div class="col border p-3">
+                        <h4>Connection Label</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">connections:
+  link1:
+    endpoints: ["router1", "switch1"]
+    text: "10 Gbps"</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
+  columns: 4
+  rows: 4
+icons:
+  router1: {x: 1, y: 2, icon: router, iconFamily: cisco}
+  switch1: {x: 3, y: 2, icon: switch, iconFamily: cisco}
+connections:
+  link1:
+    endpoints: ["router1", "switch1"]
+    text: "10 Gbps"</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mt-2">Animation</h3>
+                <p>
+                    You can animate the connection line (make it look like data is flowing) using the <code>animated</code> property.<br>
+                    Set <code>animated: true</code> to enable it.<br>
+                    You can control the speed with <code>animationSpeed</code> (<code>slow</code>, <code>medium</code>, <code>fast</code>).
+                </p>
+                <div class="row">
+                    <div class="col border p-3">
+                        <h4>Animated Connection</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">connections:
+  link1:
+    endpoints: ["router1", "switch1"]
+    animated: true
+    animationSpeed: "fast"</code></pre>
+                            <pre class="fullCode"><code class="yaml">document:
+  watermark: false
+title:
+  position: none
+diagram:
+  columns: 4
+  rows: 4
+icons:
+  router1: {x: 1, y: 2, icon: router, iconFamily: cisco}
+  switch1: {x: 3, y: 2, icon: switch, iconFamily: cisco}
+connections:
+  link1:
+    endpoints: ["router1", "switch1"]
+    animated: true
+    animationSpeed: "fast"</code></pre>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="nav-help-ref" role="tabpanel" tabindex="10">
                 <h2 class="mt-2">Reference</h2>
@@ -1801,7 +2268,7 @@ groups:
                                 <td>
                                     <pre><code class="language-yaml">null</code></pre>
                                 </td>
-                                <td>The <code>width:height</code> ration of the diagram.<br>
+                                <td>The <code>width:height</code> ratio of the diagram.<br>
                                     A null value will auto compute a best fit ratio to use all
                                     the available space</td>
                             </tr>
@@ -1891,7 +2358,7 @@ groups:
                                     <pre><code class="language-yaml">1</code></pre>
                                 </td>
                                 <td>
-                                    reserved for futur use.
+                                    reserved for future use.
                                 </td>
                             </tr>
                         </tbody>
@@ -1930,8 +2397,8 @@ groups:
                                 </td>
                                 <td>
                                     The number of columns of the drawing grid. Note that this won't change the
-                                    width of the diagram, only the range availalble as <strong>x</strong>
-                                    coordinate, with 0 being the leftest postion and this value - 1 the rightest.
+                                    width of the diagram, only the range available as <strong>x</strong>
+                                    coordinate, with 0 being the leftmost position and this value - 1 the rightmost.
                                 </td>
                             </tr>
                             <tr>
@@ -1944,9 +2411,9 @@ groups:
                                 </td>
                                 <td>
                                     The number of rows of the drawing grid. Note that this won't change the
-                                    width of the diagram, only the range availalble as <strong>y</strong>
-                                    coordinate, with 0 being the highest postion and this value - 1 the lowest.<br>
-                                    See invertY bellow to invert this axis.
+                                    width of the diagram, only the range available as <strong>y</strong>
+                                    coordinate, with 0 being the highest position and this value - 1 the lowest.<br>
+                                    See invertY below to invert this axis.
                                 </td>
                             </tr>
                             <tr>
@@ -1959,7 +2426,7 @@ groups:
                                 </td>
                                 <td>
                                     If true, the <strong>y</strong> axis will be inverted, with 0 being the
-                                    lowest postion and <code>rows</code> - 1 the highest.
+                                    lowest position and <code>rows</code> - 1 the highest.
                                 </td>
                             </tr>
                             <tr>
@@ -1978,14 +2445,14 @@ groups:
                             </tr>
                             <tr>
                                 <td>
-                                    <pre><code class="language-yaml">margin</code></pre>
+                                    <pre><code class="language-yaml">padding</code></pre>
                                 </td>
                                 <td>object</td>
                                 <td>
                                     <pre><code class="language-yaml">{ top: 10, right: 10, bottom: 10, left: 10 }</code></pre>
                                 </td>
                                 <td>
-                                    The margin in px around the diagram area (without title).<br>
+                                    The padding in px around the diagram area (without title).<br>
                                     Composed of 4 properties :
                                     <ul>
                                         <li>
@@ -2069,7 +2536,7 @@ groups:
                                     Can be either of the following:
                                     <ul>
                                         <li>
-                                            <code>bottom</code> : Draw the title bellow the diagram.
+                                            <code>bottom</code> : Draw the title below the diagram.
                                         </li>
                                         <li>
                                             <code>top</code> : Draw the title above the diagram.
@@ -2210,7 +2677,7 @@ groups:
                                     <pre><code class="language-yaml">6</code></pre>
                                 </td>
                                 <td>
-                                    The percentage relative to the global document heigth for the title area.
+                                    The percentage relative to the global document height for the title area.
                                 </td>
                             </tr>
                             <tr>
@@ -2733,10 +3200,10 @@ groups:
                                 </td>
                                 <td>
                                     An object defining the metadata to be displayed on mouse over.<br>
-                                    Any properties (except the 2 specified bellow) will be displayed as a key/value
+                                    Any properties (except the 2 specified below) will be displayed as a key/value
                                     pair.<br>
 
-                                    Extra metadata can be loaded dynamicly by using the <code>url</code>
+                                    Extra metadata can be loaded dynamically by using the <code>url</code>
                                     property.<br>
                                     The specified URL will be called with a GET request and the response will be
                                     parsed
@@ -2744,11 +3211,11 @@ groups:
                                     JSON object.<br>
                                     The response object will be merged with the <code>metadata</code> object.<br>
                                     The <code>url</code> property will be removed from the final object.<br>
-                                    The URL can be constructed dynamicly by insering <code>{{tokens}}</code> inside
+                                    The URL can be constructed dynamically by inserting <code>{{tokens}}</code> inside
                                     it.<br>
-                                    A custom erro text can be specified with the <code>errorText</code>
+                                    A custom error text can be specified with the <code>errorText</code>
                                     property.<br>
-                                    See exemples in the Icons section of this Help file.
+                                    See examples in the Icons section of this Help file.
                                 </td>
                             </tr>
                             <tr>
@@ -2984,7 +3451,7 @@ groups:
                                     <pre><code class="language-yaml">"white"</code></pre>
                                 </td>
                                 <td>
-                                    The fill color for the icon bounding box<br>
+                                    The fill color for the note bounding box<br>
                                     Can be either:
                                     <ul>
                                         <li>
@@ -3016,7 +3483,7 @@ groups:
                                 </td>
                                 <td>string</td>
                                 <td>
-                                    <pre><code class="language-yaml">"white"</code></pre>
+                                    <pre><code class="language-yaml">"black"</code></pre>
                                 </td>
                                 <td>
                                     The color of the border of the bounding box.<br>
@@ -3045,63 +3512,6 @@ groups:
                                     </ul>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <pre><code class="language-yaml">text</code></pre>
-                                </td>
-                                <td>string</td>
-                                <td>
-                                    <pre><code class="language-yaml">the object key in groups</code></pre>
-                                </td>
-                                <td>
-                                    The group's text label.<br>
-                                    By default the object key is used as text. Set this property to override it.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <pre><code class="language-yaml">strokeDashArray</code></pre>
-                                </td>
-                                <td>string</td>
-                                <td>
-                                    <pre><code class="language-yaml">"0,0"</code></pre>
-                                </td>
-                                <td>
-                                    Allow to set a dotted lines instead of a solid one.<br>
-                                    The first number is the length of the dash (in px), the second one is the length
-                                    of the gap (in px).
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <pre><code class="language-yaml">animated</code></pre>
-                                </td>
-                                <td>boolean</td>
-                                <td>
-                                    <pre><code class="language-yaml">false</code></pre>
-                                </td>
-                                <td>
-                                    If true, the group border will be animated with a marching ants effect.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <pre><code class="language-yaml">animationSpeed</code></pre>
-                                </td>
-                                <td>string</td>
-                                <td>
-                                    <pre><code class="language-yaml">"medium"</code></pre>
-                                </td>
-                                <td>
-                                    The speed of the animation when <code>animated</code> is true.<br>
-                                    Can be either:
-                                    <ul>
-                                        <li><code>slow</code> : Slow animation speed</li>
-                                        <li><code>medium</code> : Medium animation speed</li>
-                                        <li><code>fast</code> : Fast animation speed</li>
-                                    </ul>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
 
@@ -3111,16 +3521,14 @@ groups:
                 </section>
                 <hr>
                 <section>
-                    <h3 id="notes">
-                        <iconify-icon inline icon="ph:note"></iconify-icon>
-                        notes
+                    <h3 id="connections">
+                        <iconify-icon inline icon="icon-park-outline:connection"></iconify-icon>
+                        connections
                     </h3>
-                    <p>Define the notes in the diagram.</p>
-                    <h4>Type: <small>Object or Array</small></h4>
+                    <p>Define the connections between elements.</p>
+                    <h4>Type: <small>Array</small></h4>
                     <p>
-                        Contain Note objects. If defined as Object, keys can be used in connections to
-                        reference this note.<br>
-                        If defined as an Array, the position/index of the items will be used as a key.
+                        Contain Connection objects in an array.
                     </p>
 
                     <h4 class="text-end"><a href="#nav-help"><iconify-icon inline icon="mdi:arrow-top"></iconify-icon>
@@ -3129,12 +3537,12 @@ groups:
                 </section>
                 <hr>
                 <section>
-                    <h3 id="note">
-                        <iconify-icon inline icon="ph:note"></iconify-icon>
-                        note
+                    <h3 id="connection">
+                        <iconify-icon inline icon="icon-park-outline:connection"></iconify-icon>
+                        connection
                     </h3>
                     <p>
-                        Notes contain simple text or markdown.
+                        Connections are individual connection objects between icons, groups, or notes.<br>
                     </p>
                     <p>Properties:</p>
                     <table class="table table-striped table-bordered">
@@ -3149,143 +3557,185 @@ groups:
                         <tbody class="table-group-divider">
                             <tr>
                                 <td>
-                                    <pre><code class="language-yaml">x</code></pre>
+                                    <pre><code class="language-yaml">endpoints</code></pre>
                                 </td>
-                                <td>integer/string</td>
+                                <td>string array</td>
                                 <td>
                                     <pre><code class="language-yaml"></code></pre>
                                 </td>
                                 <td>
-                                    The icon x position within the digram.<br>
+                                    An array of 2 icons, groups or notes, one for each endpoint of the
+                                    connection.<br>
+                                    When an endpoint is a group, lines will be drawn to each group member.<br>
+                                    labels for each endpoint can be appended to the endpoint name, separated by a
+                                    colon.<br>
+                                    For example, <code>endpoints: [spines:40Gb,leaves:40Gb]</code>.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <pre><code class="language-yaml">curve</code></pre>
+                                </td>
+                                <td>string</td>
+                                <td>
+                                    <pre><code class="language-yaml">"Linear"</code></pre>
+                                </td>
+                                <td>
+                                    If defined, must be one of :
+                                    <ul>
+                                        <li>
+                                            <strong>Linear</strong> : Draws a line directly connecting the
+                                            endpoints.
+                                        </li>
+                                        <li>
+                                            <strong>Curved</strong> : Draws a smooth curve connecting the
+                                            endpoints.
+                                        </li>
+                                        <li>
+                                            <strong>Step</strong> : Draws a line consisting of alternating
+                                            horizontal
+                                            and vertical lines.
+                                            The y-value changes at the midpoint of each pair of adjacent x-values.
+                                        </li>
+                                        <li>
+                                            <strong>StepReversed</strong> : Draws a line consisting of alternating
+                                            vertical and horizontal lines.
+                                            The x-value changes at the midpoint of each pair of adjacent y-values.
+                                        </li>
+                                        <li>
+                                            <strong>StepAfter</strong> : Draws a line consisting of alternating
+                                            horizontal and vertical lines.
+                                            The y-value changes after the x-value.
+                                        </li>
+                                        <li>
+                                            <strong>StepBefore</strong> : Draws a line consisting of
+                                            alternating
+                                            horizontal and vertical lines.
+                                            The y-value changes before the x-value.
+                                        </li>
+                                    </ul>
+                                    See the connections section of this help page for examples.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <pre><code class="language-yaml">curveOffset</code></pre>
+                                </td>
+                                <td>number</td>
+                                <td>
+                                    <pre><code class="language-yaml">0</code></pre>
+                                </td>
+                                <td>
+                                    Offset for the curve position (used for parallel connections).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <pre><code class="language-yaml">textSizeRatio</code></pre>
+                                </td>
+                                <td>number</td>
+                                <td>
+                                    <pre><code class="language-yaml">0.1</code></pre>
+                                </td>
+                                <td>
+                                    The endpoint label text size as a ratio of the grid cell height.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <pre><code class="language-yaml">endpLabelOffsetRatio</code></pre>
+                                </td>
+                                <td>number</td>
+                                <td>
+                                    <pre><code class="language-yaml">1</code></pre>
+                                </td>
+                                <td>
+                                    The distance from the endpoint where the label is placed (as a ratio).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <pre><code class="language-yaml">margin</code></pre>
+                                </td>
+                                <td>object</td>
+                                <td>
+                                    <pre><code class="language-yaml">{ endp1: 0.08, endp2: 0.08 }</code></pre>
+                                </td>
+                                <td>
+                                    The margin/gap between the connection line and the endpoint nodes.<br>
+                                    Composed of 2 properties :
+                                    <ul>
+                                        <li>
+                                            <code>endp1</code> : The margin at the first endpoint.
+                                        </li>
+                                        <li>
+                                            <code>endp2</code> : The margin at the second endpoint.
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <pre><code class="language-yaml">color</code></pre>
+                                </td>
+                                <td>string</td>
+                                <td>
+                                    <pre><code class="language-yaml">"black"</code></pre>
+                                </td>
+                                <td>
+                                    The text color<br>
                                     Can be either:
                                     <ul>
                                         <li>
-                                            <strong>Absolute</strong> : Must be between 0 and the value defined in
-                                            diagram >
-                                            column (or its default value)<br>
-                                            0 is the leftmost position while the value defined in (diagram > column)
-                                            - 1
-                                            is
-                                            the
-                                            rightmost position.
+                                            Color keyword, like
+                                            <code>white</code>,<code>blue</code>,<code>green</code>,...
+                                            (as specified int the
+                                            <a href="https://www.w3.org/TR/SVG11/types.html#ColorKeywords">SVG
+                                                specs</a>).
                                         </li>
                                         <li>
-                                            <strong>Relative</strong> : A number prefixed with <code>+</code> or
-                                            <code>-</code>
-                                            to define the position relative to the previous icon. Ex :
-                                            <code>"+2"</code>
-                                            or
-                                            <code>"-1"</code><br>
+                                            Hexadecimal color code as
+                                            <code>#XXYYZZ</code> where
+                                            <code>XX</code>, <code>YY</code> and <code>ZZ</code> are hexadecimal
+                                            values
+                                            between 00 and FF for the red, green and blue component of the color.
+                                        </li>
+                                        <li>
+                                            <code>rgb(XXX,YYY,ZZZ)</code> where
+                                            <code>XXX</code>, <code>YYY</code> and <code>ZZZ</code> are decimal
+                                            values
+                                            between 0 and 255 for the red, green and blue component of the color.
                                         </li>
                                     </ul>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <pre><code class="language-yaml">y</code></pre>
+                                    <pre><code class="language-yaml">stroke</code></pre>
                                 </td>
-                                <td>integer/string</td>
+                                <td>string</td>
                                 <td>
-                                    <pre><code class="language-yaml"></code></pre>
+                                    <pre><code class="language-yaml">"black"</code></pre>
                                 </td>
                                 <td>
-                                    The icon y position within the digram.<br>
+                                    The color of the border of the bounding box.<br>
                                     Can be either:
                                     <ul>
                                         <li>
-                                            <strong>Absolute</strong> : Must be between 0 and the value defined in
-                                            diagram >
-                                            rows (or its default value)<br>
-                                            0 is the bottom position while the value defined in (diagram > rows) - 1
-                                            is
-                                            the
-                                            topest position.
+                                            Color keyword, like
+                                            <code>white</code>,<code>blue</code>,<code>green</code>,...
+                                            (as specified int the
+                                            <a href="https://www.w3.org/TR/SVG11/types.html#ColorKeywords">SVG
+                                                specs</a>).
                                         </li>
                                         <li>
-                                            <strong>Relative</strong> : A number prefixed with <code>+</code> or
-                                            <code>-</code>
-                                            to define the position relative to the previous icon. Ex :
-                                            <code>"+2"</code>
-                                            or
-                                            <code>"-1"</code><br>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <pre><code class="language-yaml">xAlign</code></pre>
-                                </td>
-                                <td>string</td>
-                                <td>
-                                    <pre><code class="language-yaml">left</code></pre>
-                                </td>
-                                <td>
-                                    Alignment of the text along the x axis.<br>
-                                    <ul>
-                                        <li>
-                                            <strong>left</strong> : Align the text to the left side of the note's
-                                            bounding
-                                            box.<br>
-                                            This set <code>textAlign: "left", alignItems: "flex-start"</code>
+                                            Hexadecimal color code as
+                                            <code>#XXYYZZ</code> where
+                                            <code>XX</code>, <code>YY</code> and <code>ZZ</code> are hexadecimal
+                                            values
+                                            between 00 and FF for the red, green and blue component of the color.
                                         </li>
                                         <li>
-                                            <strong>center</strong> : Align the text in the middle of the note's
-                                            bounding
-                                            box along the x axis.<br>
-                                            This set <code>textAlign: "center", alignItems: "center"</code>
-                                        </li>
-                                        <li>
-                                            <strong>right</strong> : Align the text to the right side of the note's
-                                            bounding
-                                            box.<br>
-                                            This set <code>textAlign: "right", alignItems: "flex-end"</code>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <pre><code class="language-yaml">yAlign</code></pre>
-                                </td>
-                                <td>string</td>
-                                <td>
-                                    <pre><code class="language-yaml">"top"</code></pre>
-                                </td>
-                                <td>
-                                    Alignment of the text along the y axis.<br>
-                                    <ul>
-                                        <li>
-                                            <strong>top</strong> : Align the text to the top of the note's bounding
-                                            box.<br>
-                                            This set <code>justifyContent: "flex-start"</code>
-                                        </li>
-                                        <li>
-                                            <strong>center</strong> : Align the text to the bottom side of the
-                                            note's
-                                            bounding box.<br>
-                                            This set <code>justifyContent: "center"</code>
-                                        </li>
-                                        <li>
-                                            <strong>bottom</strong> : Align the text in the middle of the note's
-                                            bounding
-                                            box along the y axis.<br>
-                                            This set <code>justifyContent: "flex-end"</code>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <pre><code class="language-yaml">alignItems</code></pre>
-                                </td>
-                                <td>string</td>
-                                <td>
-                                    <pre><code class="language-yaml">"flex-start"</code></pre>
-                                </td>
-                                <td>
-                                    This defines the default behaviour for how flex items are laid out along the
-                                    cross
                                     axis
                                     on the current line.<br>
                                     Think of it as the justify-content version for the cross-axis (perpendicular to
@@ -3336,7 +3786,7 @@ groups:
                                             <strong>row-reverse</strong> : Right to left.
                                         </li>
                                         <li>
-                                            <strong>column</strong> : Stop to bottom.
+                                            <strong>column</strong> : Top to bottom.
                                         </li>
                                         <li>
                                             <strong>column-reverse</strong> : Same as row-reverse but bottom to top
@@ -3557,7 +4007,7 @@ groups:
                                 </td>
                                 <td>string</td>
                                 <td>
-                                    <pre><code class="language-yaml">"white"</code></pre>
+                                    <pre><code class="language-yaml">"black"</code></pre>
                                 </td>
                                 <td>
                                     The color of the border of the bounding box.<br>
@@ -3586,25 +4036,6 @@ groups:
                                     </ul>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <pre><code class="language-yaml">strokeDashArray</code></pre>
-                                </td>
-                                <td>string</td>
-                                <td>
-                                    <pre><code class="language-yaml">"0,0"</code></pre>
-                                </td>
-                                <td>
-                                    Allow to set a dotted lines instead of a solid one.<br>
-                                    The fist number is the length of the dash (in px), the second one is the length
-                                    of
-                                    the
-                                    gap (in px).
-                                </td>
-                            </tr>
-
-
-
                         </tbody>
                     </table>
 
@@ -3681,10 +4112,19 @@ groups:
                                             endpoints.
                                         </li>
                                         <li>
+                                            <strong>Curved</strong> : Draws a smooth curve connecting the
+                                            endpoints.
+                                        </li>
+                                        <li>
                                             <strong>Step</strong> : Draws a line consisting of alternating
                                             horizontal
                                             and vertical lines.
                                             The y-value changes at the midpoint of each pair of adjacent x-values.
+                                        </li>
+                                        <li>
+                                            <strong>StepReversed</strong> : Draws a line consisting of alternating
+                                            vertical and horizontal lines.
+                                            The x-value changes at the midpoint of each pair of adjacent y-values.
                                         </li>
                                         <li>
                                             <strong>StepAfter</strong> : Draws a line consisting of alternating
@@ -3698,7 +4138,7 @@ groups:
                                             The y-value changes before the x-value.
                                         </li>
                                     </ul>
-                                    See the connections secttion of this help page for examples.
+                                    See the connections section of this help page for examples.
                                 </td>
                             </tr>
                             <tr>
@@ -3799,7 +4239,7 @@ groups:
                                 </td>
                                 <td>string</td>
                                 <td>
-                                    <pre><code class="language-yaml">"white"</code></pre>
+                                    <pre><code class="language-yaml">"black"</code></pre>
                                 </td>
                                 <td>
                                     The color of the border of the bounding box.<br>
@@ -3838,7 +4278,7 @@ groups:
                                 </td>
                                 <td>
                                     Allow to set a dotted lines instead of a solid one.<br>
-                                    The fist number is the length of the dash (in px), the second one is the length
+                                    The first number is the length of the dash (in px), the second one is the length
                                     of
                                     the
                                     gap (in px).
@@ -3919,7 +4359,7 @@ groups:
 
                 let fullCodeCompressed = LZString.compressToEncodedURIComponent(fullCode);
 
-                el.append('<iframe src="./index.html#fullscreen=true&autosave=false&autoupdate=true&includeYamlInSvg=false&embedFontsInSvg=false&doc=' + fullCodeCompressed + '" class="doc-iframe"></iframe>');
+                el.append('<iframe src="./index.html#fullscreen=true&autosave=false&autoupdate=true&includeYamlInSvg=false&embedFontsInSvg=false&zoomEnabled=false&doc=' + fullCodeCompressed + '" class="doc-iframe"></iframe>');
 
                 // Add toggle button for code blocks
                 el.prepend('<button class="btn btn-sm btn-secondary code-toggle-btn" title="Toggle between specific/full code"><iconify-icon inline icon="streamline:braces-circle-solid"></iconify-icon></button>');
