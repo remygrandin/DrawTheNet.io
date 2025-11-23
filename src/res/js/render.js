@@ -76,10 +76,14 @@ export function Render(containerSelector, doc, keepZoom) {
             let evt = new Event('mouseleave');
             element.dispatchEvent(evt);
         });
+
+        // Dispatch zoom change event
+        d3.select(containerSelector).node().dispatchEvent(new CustomEvent("zoomchange", { detail: e.transform }));
     });
 
     // Apply zoom behavior to the main container
     mainContainer.call(zoom);
+    mainContainer.node().__zoomBehavior = zoom;
 
     // Apply the saved zoom transform if keepZoom was true
     if (keepZoom && initialZoom && (initialZoom.k !== 1 || initialZoom.x !== 0 || initialZoom.y !== 0)) {

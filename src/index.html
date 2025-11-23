@@ -317,7 +317,7 @@
                     <div class="h-100" id="preview"></div>
                     <!-- Reset Zoom Button (in preview area) -->
                     <button type="button" class="btn btn-info btn-sm" id="btnResetZoom"
-                        style="position: absolute; bottom: 20px; left: 20px; z-index: 100; opacity: 0.3; transition: opacity 0.2s;"
+                        style="position: absolute; bottom: 20px; left: 20px; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.2s;"
                         title="Reset Zoom">
                         <iconify-icon inline icon="mdi:magnify-expand"></iconify-icon>
                     </button>
@@ -2128,6 +2128,21 @@
                 $("#btnSaveSVG").click();
             });
 
+            // Handle zoom change event to show/hide reset button
+            document.getElementById("preview").addEventListener("zoomchange", function(e) {
+                const transform = e.detail;
+                const btnResetZoom = document.getElementById("btnResetZoom");
+                if (btnResetZoom) {
+                    if (transform.k !== 1 || transform.x !== 0 || transform.y !== 0) {
+                        btnResetZoom.style.opacity = "0.5";
+                        btnResetZoom.style.pointerEvents = "auto";
+                    } else {
+                        btnResetZoom.style.opacity = "0";
+                        btnResetZoom.style.pointerEvents = "none";
+                    }
+                }
+            });
+
             // Reset Zoom button
             $("#btnResetZoom").on("click", function (event) {
                 event.preventDefault();
@@ -2137,9 +2152,8 @@
                 if (svg.node() == null) return;
 
                 // Get the zoom behavior from the svg
-                let zoom = d3.zoom().on("zoom", function (e) {
-                    d3.select("#preview .zoom").attr("transform", e.transform);
-                });
+                let zoom = svg.node().__zoomBehavior;
+                if (!zoom) return;
 
                 // Reset to identity transform
                 svg.transition()
