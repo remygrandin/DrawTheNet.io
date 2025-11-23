@@ -1555,8 +1555,115 @@ icons:
             </div>
             <div class="tab-pane fade" id="nav-help-groups" role="tabpanel" tabindex="7">
                 <h2 class="mt-2">Groups</h2>
+                <p>
+                    Groups allow you to visually group multiple nodes (icons, notes, or other groups) together.<br>
+                    They are defined in the <code>groups</code> section.
+                </p>
 
+                <h3 class="mt-2">Members</h3>
+                <p>
+                    The <code>members</code> property is a list of keys of the objects to include in the group.<br>
+                    These keys refer to the keys defined in <code>icons</code>, <code>notes</code> or <code>groups</code>.
+                </p>
 
+                <h4 class="mt-2">Example:</h4>
+                <div class="row">
+                    <div class="col border p-3">
+                        <h4>Basic Group</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">groups:
+  myGroup:
+    members: [icon1, icon2]
+    text: "My Group"</code></pre>
+                            <pre class="fullCode"><code class="yaml">diagram:
+  columns: 4
+  rows: 4
+icons:
+  icon1: {x: 1, y: 1, icon: router, iconFamily: cisco}
+  icon2: {x: 2, y: 1, icon: switch, iconFamily: cisco}
+groups:
+  myGroup:
+    members: [icon1, icon2]
+    text: "My Group"</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mt-2">Styling</h3>
+                <p>
+                    You can customize the appearance of the group using:
+                    <ul>
+                        <li><code>text</code>: The label of the group.</li>
+                        <li><code>color</code>: The color of the text.</li>
+                        <li><code>fill</code>: The background color of the group area.</li>
+                        <li><code>stroke</code>: The color of the group border.</li>
+                        <li><code>strokeDashArray</code>: To create dashed lines for the border.</li>
+                    </ul>
+                </p>
+
+                <div class="row">
+                    <div class="col border p-3">
+                        <h4>Styled Group</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">groups:
+  styledGroup:
+    members: [icon1, icon2]
+    text: "Styled Group"
+    color: "red"
+    fill: "#ffeeee"
+    stroke: "red"
+    strokeDashArray: "5,5"</code></pre>
+                            <pre class="fullCode"><code class="yaml">diagram:
+  columns: 4
+  rows: 4
+icons:
+  icon1: {x: 1, y: 1, icon: router, iconFamily: cisco}
+  icon2: {x: 2, y: 1, icon: switch, iconFamily: cisco}
+groups:
+  styledGroup:
+    members: [icon1, icon2]
+    text: "Styled Group"
+    color: "red"
+    fill: "#ffeeee"
+    stroke: "red"
+    strokeDashArray: "5,5"</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mt-2">Text Location</h3>
+                <p>
+                    The position of the group label can be customized using <code>textLocation</code>.<br>
+                    Available values include:
+                    <code>topLeft</code>, <code>topCenter</code>, <code>topRight</code>,
+                    <code>bottomLeft</code>, <code>bottomCenter</code>, <code>bottomRight</code>,
+                    <code>leftTop</code>, <code>leftMiddle</code>, <code>leftBottom</code>,
+                    <code>rightTop</code>, <code>rightMiddle</code>, <code>rightBottom</code>.
+                </p>
+
+                <div class="row">
+                    <div class="col border p-3">
+                        <h4>Text Location</h4>
+                        <div class="previewBlock">
+                            <pre class="shortCode"><code class="yaml">groups:
+  bottomGroup:
+    members: [icon1, icon2]
+    text: "Bottom Label"
+    textLocation: "bottomCenter"</code></pre>
+                            <pre class="fullCode"><code class="yaml">diagram:
+  columns: 4
+  rows: 4
+icons:
+  icon1: {x: 1, y: 1, icon: router, iconFamily: cisco}
+  icon2: {x: 2, y: 1, icon: switch, iconFamily: cisco}
+groups:
+  bottomGroup:
+    members: [icon1, icon2]
+    text: "Bottom Label"
+    textLocation: "bottomCenter"</code></pre>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="nav-help-notes" role="tabpanel" tabindex="8">
                 <h2 class="mt-2">Notes</h2>
