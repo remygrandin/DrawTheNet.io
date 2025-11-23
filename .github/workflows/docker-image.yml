@@ -83,6 +83,7 @@ jobs:
           generate_release_notes: true
           draft: false
           prerelease: false
-          tag_name: AutoBuild-${{ steps.meta.outputs.SHORT_SHA }}
+          name: AutoBuild-${{ steps.date.outputs.date }}-dist-${{ steps.meta.outputs.SHORT_SHA }}
+          tag_name: AutoBuild
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
