@@ -598,20 +598,13 @@
                 return returnObj;
             }
 
-            function SetParams(params) {
-                window.location.hash = "#" + genParamString(params)
-
-                history.pushState(null, null, '#' + genParamString(params));
-                /*
-                            if (window.location.hash == '#' + urlParams.toString()) {
-                                history.replaceState(null, null, '#');
-                                history.replaceState(null, null, '#' + urlParams.toString());
-                            }
-                            else {
-                                history.pushState(null, null, '#' + urlParams.toString());
-                            }
-                
-                            */
+            function SetParams(params, pushHistory = false) {
+                const hash = '#' + genParamString(params);
+                if (pushHistory) {
+                    history.pushState(null, null, hash);
+                } else {
+                    history.replaceState(null, null, hash);
+                }
             }
 
             // =============================================
@@ -816,31 +809,31 @@
             editor.setValue(params.doc, -1);
 
             // Also update URL to ensure params are persisted
-            SetParams(params);
+            SetParams(params, false);
 
             // Settings modal synchronization
             $('#settingsAutoSave').change(async function () {
                 params = await LoadParams();
                 params.autosave = $(this).is(":checked");
-                SetParams(params);
+                SetParams(params, false);
             });
 
             $('#settingsAutoUpdate').change(async function () {
                 params = await LoadParams();
                 params.autoupdate = $(this).is(":checked");
-                SetParams(params);
+                SetParams(params, false);
             });
 
             $('#settingsIncludeYamlInSvg').change(async function () {
                 params = await LoadParams();
                 params.includeYamlInSvg = $(this).is(":checked");
-                SetParams(params);
+                SetParams(params, false);
             });
 
             $('#settingsEmbedFontsInSvg').change(async function () {
                 params = await LoadParams();
                 params.embedFontsInSvg = $(this).is(":checked");
-                SetParams(params);
+                SetParams(params, false);
             });
 
             // Sync settings modal when opened
@@ -901,7 +894,7 @@
                         let currentParams = await LoadParams();
                         if (currentParams.autosave) {
                             currentParams.doc = text;
-                            SetParams(currentParams);
+                            SetParams(currentParams, false);
                         }
 
                         let doc = jsyaml.load(text);
@@ -1930,7 +1923,7 @@
                 event.preventDefault();
                 let currentParams = await LoadParams();
                 currentParams.fullscreen = !currentParams.fullscreen;
-                SetParams(currentParams);
+                SetParams(currentParams, true);
                 await applyFullscreen(currentParams.fullscreen);
             });
 
@@ -1938,8 +1931,30 @@
                 event.preventDefault();
                 let currentParams = await LoadParams();
                 currentParams.fullscreen = false;
-                SetParams(currentParams);
+                SetParams(currentParams, true);
                 await applyFullscreen(currentParams.fullscreen);
+            });
+
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', async function(event) {
+                let currentParams = await LoadParams();
+                
+                // Check if fullscreen state matches current params
+                const isCurrentlyFullscreen = $("#fullscreenPreview").is(":visible");
+                if (currentParams.fullscreen !== isCurrentlyFullscreen) {
+                    await applyFullscreen(currentParams.fullscreen);
+                }
+                
+                // Update editor content if it changed in history (e.g. undo via back button)
+                // Note: This might overwrite unsaved changes if not careful, but since we autosave to history on change,
+                // navigating back should just go to previous state.
+                if (currentParams.doc && currentParams.doc !== editor.session.getValue()) {
+                    // Temporarily disable change handler to avoid triggering autosave/render loop
+                    editor.session.off('change', editorChangeHandler);
+                    editor.setValue(currentParams.doc, -1);
+                    editor.session.on('change', editorChangeHandler);
+                    Render(0, false);
+                }
             });
 
             async function applyFullscreen(isFullscreen) {
@@ -2030,7 +2045,7 @@
             // =========== Keyboard Shortcut ===============
             // =============================================
 
-            $(document).on("keydown", function (event) {
+            $(document).on("keydown", async function (event) {
                 if (event.ctrlKey && event.key == "s") {
                     event.preventDefault();
                     $("#btnSave").click();
@@ -2038,6 +2053,15 @@
                 else if (event.ctrlKey && event.key == "Enter") {
                     event.preventDefault();
                     $("#btnFullscreen").click();
+                }
+                else if (event.key == "Escape") {
+                    let currentParams = await LoadParams();
+                    if (currentParams.fullscreen) {
+                        event.preventDefault();
+                        currentParams.fullscreen = false;
+                        SetParams(currentParams, true);
+                        await applyFullscreen(false);
+                    }
                 }
             });
 
@@ -2051,7 +2075,7 @@
 
                 let params = await LoadParams();
                 params.doc = text;
-                SetParams(params);
+                SetParams(params, false);
             });
 
             // =============================================
