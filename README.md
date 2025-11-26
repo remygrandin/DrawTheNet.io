@@ -12,10 +12,12 @@ Given a yaml file describing the hierarchy of the network and its connections, a
 
 
 [![Build](https://github.com/remygrandin/DrawTheNet.IO/actions/workflows/docker-image.yml/badge.svg)](https://github.com/remygrandin/DrawTheNet.IO/actions/workflows/docker-image.yml)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
 
 ## Table of Contents
 
 - [Motivation](#motivation)
+- [Features](#features)
 - [Quick start](#quick-start)
 - [Deploying with Docker](#deploying-with-docker)
 - [Deploying Static Files](#deploying-static-files)
@@ -37,9 +39,35 @@ The goal behind DrawTheNet.IO is to be able to describe the diagram in a text fi
 
 Also, being able to store a diagram as text makes it easy to version control and share.
 
+# Features
+
+- **Text-to-Diagram**: Define your network topology using simple YAML syntax.
+- **Live Preview**: See changes instantly as you type.
+- **Multiple Icon Sets**: Includes icons from AWS, Azure, Google Cloud, Cisco, and more.
+- **Export Options**: Save your diagrams as SVG or PNG images.
+- **Browser-Based**: Runs entirely in the browser, no backend required for static deployment.
+- **Docker Support**: Easy to deploy using the official Docker image.
+
 # Quick start
 
 Go to https://drawthenet.io and start creating diagrams.
+
+Here is a simple example to get you started:
+
+```yaml
+diagram:
+  columns: 4
+  rows: 3
+
+icons:
+  internet: { x: 1, y: 0, iconFamily: "Azure", icon: "Website-Staging" }
+  firewall: { x: 1, y: 1, iconFamily: "Cisco", icon: "firewall" }
+  server:   { x: 1, y: 2, iconFamily: "AWS",   icon: "Compute_EC2" }
+
+connections:
+  - { endpoints: ["internet", "firewall"] }
+  - { endpoints: ["firewall", "server"] }
+```
 
 # Deploying with Docker (Recommended)
 
@@ -102,15 +130,15 @@ You can find a detailed help guide, including a full list of available propertie
 
 # Vendor Icons
 The following vendors are available by default:
- - Amazon Web Services (as AWS), from https://aws.amazon.com/architecture/icons/?nc1=h_ls
- - Microsoft Azure (as Azure), from https://learn.microsoft.com/fr-fr/azure/architecture/icons/
- - Microsoft 365 (as M365), from https://learn.microsoft.com/fr-fr/microsoft-365/solutions/architecture-icons-templates
- - Microsoft Dynamics 365 (as D365), from https://learn.microsoft.com/fr-fr/dynamics365/get-started/icons
- - Microsoft Power Platform (as PowerPlatform), from https://learn.microsoft.com/fr-fr/power-platform/guidance/icons
- - Google Cloud Platform (as GCP), from https://cloud.google.com/icons?hl=fr
- - Cisco Meraki (as Meraki), from https://meraki.cisco.com/product-collateral/cisco-meraki-topology-icons/
- - Cisco (as Cisco), from https://www.cisco.com/c/en/us/about/brand-center/network-topology-icons.html
- - Fortinet (as Fortinet), from https://www.fortinet.com/resources/icon-library
+ - **Amazon Web Services** (as AWS), from https://aws.amazon.com/architecture/icons/
+ - **Microsoft Azure** (as Azure), from https://learn.microsoft.com/azure/architecture/icons/
+ - **Microsoft 365** (as M365), from https://learn.microsoft.com/microsoft-365/solutions/architecture-icons-templates
+ - **Microsoft Dynamics 365** (as D365), from https://learn.microsoft.com/dynamics365/get-started/icons
+ - **Microsoft Power Platform** (as PowerPlatform), from https://learn.microsoft.com/power-platform/guidance/icons
+ - **Google Cloud Platform** (as GCP), from https://cloud.google.com/icons
+ - **Cisco Meraki** (as Meraki), from https://meraki.cisco.com/product-collateral/cisco-meraki-topology-icons/
+ - **Cisco** (as Cisco), from https://www.cisco.com/c/en/us/about/brand-center/network-topology-icons.html
+ - **Fortinet** (as Fortinet), from https://www.fortinet.com/resources/icon-library
  
 You also have access to all the icons from [Iconify](https://icon-sets.iconify.design/)
 
@@ -131,11 +159,22 @@ docker build -t local/drawthenet.io .
 It will build the docker image from scratch, including downloading the icons from all vendors specified above. It will run the app with nginx, listening on port 80.
 
 ## Local Build
-You need [libvisio2svg](https://github.com/kakwa/libvisio2svg) including its dependencies (libxml2-dev libwmf-dev gsfonts libemf2svg-dev libvisio-dev librevenge-dev) and powershell installed and available in your path for the full build to work.
-If not, some icon sets (Cisco, Fortinet) will not be generated and available.
-You can find the build script in the [tools folder](./tools/build.ps1)
 
-```
+To perform a full local build, you need PowerShell and [libvisio2svg](https://github.com/kakwa/libvisio2svg) installed.
+
+The following dependencies are required for `libvisio2svg` (package names may vary by distribution):
+- `libxml2-dev`
+- `libwmf-dev`
+- `gsfonts`
+- `libemf2svg-dev`
+- `libvisio-dev`
+- `librevenge-dev`
+
+If these dependencies are not met, some icon sets (Cisco, Fortinet) will not be generated, but the rest of the application will build correctly.
+
+You can find the build script in the [tools folder](./tools/build.ps1):
+
+```bash
 cd ./tools/
 pwsh ./build.ps1
 ```
@@ -148,22 +187,33 @@ As it is a fully static website, you can host it on any webserver.
 
 # Built with great open source software
 
-- **JQuery** https://jquery.com/
-- **Bootstrap** https://getbootstrap.com/
+- **JQuery:** https://jquery.com/
+- **Bootstrap:** https://getbootstrap.com/
 - **D3.js:** https://d3js.org/
 - **Ace editor:** https://ace.c9.io/
 - **Iconify:** https://iconify.design/
 - **Fuse.js:** https://fusejs.io/
 - **js-yaml:** https://github.com/nodeca/js-yaml
-- **JQuery Toast** https://kamranahmed.info/toast
+- **JQuery Toast:** https://kamranahmed.info/toast
 - **Showdown:** https://github.com/showdownjs/showdown
 - **Highlight.js:** https://highlightjs.org/
-- **libvisio2svg** https://github.com/kakwa/libvisio2svg
+- **LZ-String:** https://pieroxy.net/blog/pages/lz-string/index.html
+- **Luxon:** https://moment.github.io/luxon/
+- **Select2:** https://select2.org/
+- **jsTree:** https://www.jstree.com/
+- **Google Palette:** https://github.com/google/palette.js
+- **libvisio2svg:** https://github.com/kakwa/libvisio2svg
 
 
 # Contributing
 
-Please do.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 # Versioning
 
