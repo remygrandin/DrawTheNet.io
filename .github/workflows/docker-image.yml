@@ -29,13 +29,6 @@ jobs:
           echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> "$GITHUB_OUTPUT"
           echo "SHORT_SHA=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
-      - name: Cache Docker layers
-        uses: actions/cache@v4
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-buildx-
-
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -50,8 +43,8 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: |
-            ${{ secrets.DOCKERHUBUSER }}/${{ secrets.DOCKERHUBPROJECTNAME }}:latest
             ${{ secrets.DOCKERHUBUSER }}/${{ secrets.DOCKERHUBPROJECTNAME }}:${{ steps.meta.outputs.SHORT_SHA }}
+            ${{ secrets.DOCKERHUBUSER }}/${{ secrets.DOCKERHUBPROJECTNAME }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache
 
       - name: Get current date
