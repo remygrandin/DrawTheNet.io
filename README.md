@@ -86,8 +86,6 @@ The application will be available at `http://localhost:8080`.
 For easier deployment and management, you can use Docker Compose. Create a `docker-compose.yml` file:
 
 ```yaml
-version: '3.8'
-
 services:
   drawthenet:
     image: darkphoenics/drawthenet.io:latest
@@ -100,7 +98,7 @@ services:
 Then start the service:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ## Custom Configuration
