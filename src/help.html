@@ -137,6 +137,10 @@
                     type="button" role="tab">
                     Reference
                 </button>
+                <button class="nav-link" id="nav-help-urlparams-tab" data-bs-toggle="tab" data-bs-target="#nav-help-urlparams"
+                    type="button" role="tab">
+                    URL Params
+                </button>
             </div>
         </nav>
         <div class="tab-content" id="nav-help-tabContent">
@@ -4373,6 +4377,89 @@ connections:
                             Back
                             to the top</a></h4>
                 </section>
+            </div>
+            <div class="tab-pane fade" id="nav-help-urlparams" role="tabpanel" tabindex="11">
+                <h2 class="mt-2">URL Parameters</h2>
+                <p>
+                    DrawTheNet.IO supports several URL parameters to control the application's behavior and load diagrams directly.
+                    These parameters can be passed in the URL hash (after the <code>#</code> character).
+                </p>
+                
+                <h3 class="mt-2">Available Parameters</h3>
+                <table class="table table-striped table-bordered">
+                    <thead class="text-center">
+                        <tr>
+                            <th scope="col">Parameter</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Default</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr>
+                            <td><code>doc</code></td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>
+                                The diagram content, compressed using LZString. This allows you to share diagrams via URL.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>fullscreen</code></td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>
+                                If set to <code>true</code>, the application opens in fullscreen mode (hiding the editor).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>zoomEnabled</code></td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>
+                                Controls whether zooming and panning are enabled in the diagram view.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>autosave</code></td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>
+                                Enables or disables the autosave feature.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>autoupdate</code></td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>
+                                If <code>true</code>, the diagram updates automatically as you type.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>includeYamlInSvg</code></td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>
+                                If <code>true</code>, the YAML source code is embedded in the exported SVG file.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>embedFontsInSvg</code></td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>
+                                If <code>true</code>, fonts are embedded in the exported SVG file to ensure consistent rendering.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="mt-2">Example</h3>
+                <p>
+                    To open a diagram in fullscreen mode with autosave disabled:
+                </p>
+                <pre><code>https://drawthenet.io/#fullscreen=true&autosave=false&doc=...</code></pre>
             </div>
         </div>
     </div>
