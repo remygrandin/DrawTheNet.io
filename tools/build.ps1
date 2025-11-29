@@ -743,11 +743,6 @@ function DownloadCiscoIcons {
 function DownloadFortinetIcons {
     Write-Output "------ Fortinet ------"
 
-    if (-not $vssConvInstalled) {
-        Write-Output "vss2svg-conv not installed, skipping Cisco icons download & format"
-        return
-    }
-
     $zipPath = Join-Path $tempPath "Fortinet.zip"
     $extractPath = Join-Path $tempPath "Fortinet"
     $destPath = Join-Path $iconsPath "Fortinet"
@@ -761,19 +756,21 @@ function DownloadFortinetIcons {
     Expand-Archive -Path $zipPath -DestinationPath $extractPath -Force
     Write-Output "Done"
 
-    Write-Output "Extract again..."
-    $innerZips = Get-ChildItem -Recurse -Path $extractPath | Where-Object { $_.Name.EndsWith(".zip") }
-
-    foreach ($zip in $innerZips) {
-        Write-Output "    Extracting $($zip.FullName) ..."
-        Expand-Archive -Path $zip.FullName -DestinationPath $extractPath -Force
-    }
-    Write-Output "Done"
-
     Write-Output "Fix permission..."
     if ($IsLinux) {
         foreach ($file in Get-ChildItem $extractPath -Recurse -File) {
             $file.UnixFileMode += "OtherRead"
+        }
+    }
+    Write-Output "Done"
+
+    Write-Output "Fix name..."
+    if ($IsLinux) {
+        foreach ($file in Get-ChildItem $extractPath -Recurse -File) {
+            $newName = $file.Name -replace " ", "_"
+            if ($newName -ne $file.Name) {
+                Rename-Item -Path $file.FullName -NewName $newName -Force
+            }
         }
     }
     Write-Output "Done"
@@ -787,7 +784,7 @@ function DownloadFortinetIcons {
 
         $iconSVG = Get-Content -Path $icon.FullName -Raw
 
-        $title = [System.IO.Path]::GetFileNameWithoutExtension($icon)
+        $title = [System.IO.Path]::GetFileNameWithoutExtension($icon) -replace "\.", "-"
 
         $iconSVG = $iconSVG -replace "cls-", "cls-$title-"
         $iconSVG = $iconSVG -replace """st", """st-$title-"
