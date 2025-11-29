@@ -739,7 +739,118 @@ function DownloadCiscoIcons {
     Write-Output "Done"
 }
 
+
 function DownloadFortinetIcons {
+    Write-Output "------ Fortinet ------"
+
+    if (-not $vssConvInstalled) {
+        Write-Output "vss2svg-conv not installed, skipping Cisco icons download & format"
+        return
+    }
+
+    $zipPath = Join-Path $tempPath "Fortinet.zip"
+    $extractPath = Join-Path $tempPath "Fortinet"
+    $destPath = Join-Path $iconsPath "Fortinet"
+
+    Write-Output "Download..."
+    Invoke-WebRequest -Uri "https://icons.fortinet.com/Fortinet-Icon-Library.zip" -OutFile $zipPath
+    Write-Output "Done"
+
+    Write-Output "Extract..."
+    New-Item -Type Directory -Path $extractPath -Force | Out-Null
+    Expand-Archive -Path $zipPath -DestinationPath $extractPath -Force
+    Write-Output "Done"
+
+    Write-Output "Extract again..."
+    $innerZips = Get-ChildItem -Recurse -Path $extractPath | Where-Object { $_.Name.EndsWith(".zip") }
+
+    foreach ($zip in $innerZips) {
+        Write-Output "    Extracting $($zip.FullName) ..."
+        Expand-Archive -Path $zip.FullName -DestinationPath $extractPath -Force
+    }
+    Write-Output "Done"
+
+    Write-Output "Fix permission..."
+    if ($IsLinux) {
+        foreach ($file in Get-ChildItem $extractPath -Recurse -File) {
+            $file.UnixFileMode += "OtherRead"
+        }
+    }
+    Write-Output "Done"
+
+    Write-Output "Edit Icons..."
+    $icons = Get-ChildItem -Recurse -Path $extractPath | `
+        Where-Object { $_.Name.EndsWith(".svg") } 
+    
+    foreach ($icon in $icons) {
+        Write-Output "    Editing  $($icon.FullName) ..."
+
+        $iconSVG = Get-Content -Path $icon.FullName -Raw
+
+        $title = [System.IO.Path]::GetFileNameWithoutExtension($icon)
+
+        $iconSVG = $iconSVG -replace "cls-", "cls-$title-"
+        $iconSVG = $iconSVG -replace """st", """st-$title-"
+        $iconSVG = $iconSVG -replace "\.st", ".st-$title-"
+
+        $iconSVG | Set-Content -Path $icon.FullName -Force
+    }
+
+    Write-Output "Done"
+
+    Write-Output "Copy :"
+    New-Item -Type Directory -Path $destPath -Force | Out-Null
+    $svgFilesRaw = Get-ChildItem $extractPath -Recurse | `
+        Select-Object -ExpandProperty FullName | `
+        Where-Object { $_.EndsWith(".svg") }
+
+    # filtering the lowest resolution icons
+    $svgFilesParsed = @()
+    foreach ($svgFile in $svgFilesRaw) {       
+        $obj = [PSCustomObject]@{
+            FullName = $svgFile
+            FileName = Split-Path $svgFile -leaf
+        }
+
+        $obj.FileName -match "(.*).svg" | Out-Null
+
+        $baseName = $Matches[1] -replace "_-_", "-"
+
+        $obj | Add-Member -MemberType NoteProperty -Name "BaseName" -Value $baseName
+        $obj | Add-Member -MemberType NoteProperty -Name "Name" -Value ("$($obj.BaseName).svg")      
+
+        $svgFilesParsed += $obj
+    }
+
+    $copiedFiles = @()
+
+    foreach ($svgFileParsed in $svgFilesParsed) {
+        Write-Output "    Copy $($svgFileParsed.FullName) as $($svgFileParsed.Name) ..."
+        Copy-Item -Path $svgFileParsed.FullName -Destination (Join-Path $destPath $svgFileParsed.Name) -Force
+
+        $copiedFiles += $svgFileParsed.BaseName
+    }
+
+    Write-Output "Adding data to icons.json..."
+    $iconsJson = $null
+    
+    if (Test-Path $iconsJSONPath) {
+        $iconsJson = Get-Content $iconsJSONPath | ConvertFrom-Json
+    }
+    else {
+        $iconsJson = [PSCustomObject]@{
+        }
+    }
+    
+    $iconsJson | Add-Member -MemberType NoteProperty -Name "Fortinet" -Value $copiedFiles -Force | Out-Null
+    $iconsJson | ConvertTo-Json -Depth 100 | Out-File $iconsJSONPath -Force
+
+    Write-Output "Done"
+}
+
+
+
+function DownloadFortinetIcons_deprecated_2025-11-29 {
     Write-Output "------ Fortinet ------"
 
     if (-not $vssConvInstalled) {
